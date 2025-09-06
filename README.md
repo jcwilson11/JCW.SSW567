@@ -47,4 +47,4 @@ def test_get_weather():
 4. An assewrtion is going to tell us if something is true or false. So we're satying insert, some condition to be true or false. If it's true, the test passes. If it is false, it fails.
 5. To run the tets, make sure you are in the directory with the test file. Then in the integreated terminal, type the following: `pytest test_main.py`
 
-Helpful vidoe regarding unit testing. Incliudes defintions, how-to examples, test driven development, etc: [PyTest Tutorial]([https://pages.github.com/](https://youtu.be/EgpLj86ZHFQ?si=kxXrjy8FQTjtnmTj))
+Helpful vidoe regarding unit testing. Incliudes defintions, how-to examples, test driven development, etc: [PyTest Tutorial](https://youtu.be/EgpLj86ZHFQ?si=kxXrjy8FQTjtnmTj)

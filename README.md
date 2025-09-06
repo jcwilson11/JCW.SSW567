@@ -48,3 +48,5 @@ def test_get_weather():
 5. To run the tets, make sure you are in the directory with the test file. Then in the integreated terminal, type the following: `pytest test_main.py`
 
 Helpful vidoe regarding unit testing. Incliudes defintions, how-to examples, test driven development, etc: [PyTest Tutorial](https://youtu.be/EgpLj86ZHFQ?si=kxXrjy8FQTjtnmTj)
+
+Running test automatically in github after each commit: [YouTube](https://youtu.be/DhUpxWjOhME)

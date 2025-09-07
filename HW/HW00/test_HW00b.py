@@ -39,7 +39,7 @@ def test_scalene(sides, expected):
 
 @pytest.mark.parametrize("sides, expected", [
     ((1, 1, 2**0.5), "isosceles right triangle"),
-    ((2, 2, (2*2)**0.5), "isosceles right triangle"),
+    ((2, 2, (2*2)**0.5), "isosceles right triangle"), # fail
     ((3, 3, (2*3**2)**0.5), "isosceles right triangle"),
     ((1.5, 1.5, (2*1.5**2)**0.5), "isosceles right triangle"),
     ((2.5002, 2.5002, (2*2.5002**2)**0.5), "isosceles right triangle"),

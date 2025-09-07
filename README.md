@@ -64,6 +64,7 @@ def test_isosceles(sides, expected):
 def test_scalene(sides, expected):
     assert classify_triangle(*sides) == expected
 ```
+I prefer using this since there's more of a breakdown of which specific assertion failed, vs which test as a whole failed.
 4. An assewrtion is going to tell us if something is true or false. So we're satying insert, some condition to be true or false. If it's true, the test passes. If it is false, it fails.
 5. To run the tets, make sure you are in the directory with the test file. Then in the integreated terminal, type the following: `pytest test_main.py`
 

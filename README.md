@@ -71,3 +71,5 @@ I prefer using this since there's more of a breakdown of which specific assertio
 Helpful vidoe regarding unit testing. Incliudes defintions, how-to examples, test driven development, etc: [PyTest Tutorial](https://youtu.be/EgpLj86ZHFQ?si=kxXrjy8FQTjtnmTj)
 
 Running test automatically in github after each commit: [YouTube](https://youtu.be/DhUpxWjOhME)
+
+While working to find a concrete answer to "How many tests is too many", I came across mutation testing. I pip installed a program called Cosmic Ray, and ran it on my test cases for the triangle test assignment, HW00b. 

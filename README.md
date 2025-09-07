@@ -73,3 +73,49 @@ Helpful vidoe regarding unit testing. Incliudes defintions, how-to examples, tes
 Running test automatically in github after each commit: [YouTube](https://youtu.be/DhUpxWjOhME)
 
 While working to find a concrete answer to "How many tests is too many", I came across mutation testing. I pip installed a program called Cosmic Ray, and ran it on my test cases for the triangle test assignment, HW00b. 
+
+Cosmic Ray Config
+- create a cr.toml file
+
+```
+[cosmic-ray]
+# File or top-level package to mutate
+module-path = "HW00b.py"
+
+# How long (in seconds) to allow each mutated test run
+timeout = 10.0
+
+# EXACT command to run tests (Windows-safe)
+# Use `-p no:pytest_cov` if plugins like pytest-cov cause errors
+test-command = "python -m pytest -q -p no:pytest_cov test_HW00b.py"
+
+# Optionally exclude entire modules or packages
+excluded-modules = []
+
+[cosmic-ray.distributor]
+# "local" = serial; "multiprocessing" = use all CPU cores
+name = "multiprocessing"
+```
+1. Initialize the mutation plan (creates a SQLite DB of mutants):
+   `cosmic-ray init cr.toml cr.sqlite`
+2. Run the mutation (may take a while, be patient)
+   `cosmic-ray exec cr.toml cr.sqlite`
+3. View results
+   - Quick survival rate: `cr-rate cr.sqlite`
+   - Console report: `cr-report cr.sqlite`
+   - HTML report: `cr-html cr.sqlite > report.html`
+
+Interpreting Results
+
+Killed mutant - A test failed as expected. 
+
+Survived mutant - Tests passed even though the code was changed. 
+   - Could mean a missing edge-case test.
+   - Or could be an equivalent mutant (no observable behavior change).
+
+Workflow
+1. Write tests for all functional requirements and edge cases.
+2. Run Cosmic Ray and review survivors.
+3. Add new tests if survivors reveal real gaps.
+4. Document any equivalent mutants that cannot be killed.
+5. Re-run until you are confident in coverage.

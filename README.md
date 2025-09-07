@@ -44,6 +44,26 @@ def test_get_weather():
     assert get_weather(15) == "It's a bit chilly"
     assert get_weather(5) == "It's cold"
 ```
+
+Another option, which is more standard to industry and more intuitive, is to utilize parameterization. Follow the sample below:
+
+```
+@pytest.mark.parametrize("sides, expected", [
+    ((3, 3, 2), "isosceles triangle"),
+    ((5, 8, 8), "isosceles triangle"),
+])
+def test_isosceles(sides, expected):
+    assert classify_triangle(*sides) == expected
+
+
+@pytest.mark.parametrize("sides, expected", [
+    ((3, 4, 5), "scalene right triangle"),
+    ((5, 6, 7), "scalene triangle"),
+    ((7, 8, 9), "scalene triangle"),
+])
+def test_scalene(sides, expected):
+    assert classify_triangle(*sides) == expected
+```
 4. An assewrtion is going to tell us if something is true or false. So we're satying insert, some condition to be true or false. If it's true, the test passes. If it is false, it fails.
 5. To run the tets, make sure you are in the directory with the test file. Then in the integreated terminal, type the following: `pytest test_main.py`
 

@@ -5,10 +5,12 @@ import requests
 class GitHubError(Exception):
     pass
 
+#tested
 def fetch_json(session: requests.Session, url: str, params: dict | None = None) -> requests.Response:
     resp = session.get(url, params=params or {})
     return resp
 
+#tested
 def paginate_json(session: requests.Session, url: str, per_page: int = 100):
     page = 1
     while True:

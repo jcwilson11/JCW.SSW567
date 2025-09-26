@@ -5,14 +5,14 @@ import requests
 class GitHubError(Exception):
     pass
 
-def _fetch_json(session: requests.Session, url: str, params: dict | None = None) -> requests.Response:
+def fetch_json(session: requests.Session, url: str, params: dict | None = None) -> requests.Response:
     resp = session.get(url, params=params or {})
     return resp
 
-def _paginate_json(session: requests.Session, url: str, per_page: int = 100):
+def paginate_json(session: requests.Session, url: str, per_page: int = 100):
     page = 1
     while True:
-        resp = _fetch_json(session, url, {"per_page": per_page, "page": page})
+        resp = fetch_json(session, url, {"per_page": per_page, "page": page})
         if resp.status_code == 404:
             # user or repo not found.
             yield "404"
@@ -35,7 +35,7 @@ def get_repo_commit_counts(username: str, session: Optional[requests.Session] = 
 
     # 1) Fetch all repositories 
     repos_url = f"https://api.github.com/users/{username}/repos"
-    repo_pages = list(_paginate_json(sess, repos_url))
+    repo_pages = list(paginate_json(sess, repos_url))
     if repo_pages and repo_pages[0] == "404":
         raise GitHubError(f"User not found: {username}")
     if repo_pages and isinstance(repo_pages[0], dict) and "error" in repo_pages[0]:
@@ -55,7 +55,7 @@ def get_repo_commit_counts(username: str, session: Optional[requests.Session] = 
         commits_url = f"https://api.github.com/repos/{owner}/{name}/commits"
         total = 0
         first = True
-        for chunk in _paginate_json(sess, commits_url):
+        for chunk in paginate_json(sess, commits_url):
             if chunk == "409":
                 # empty repo -> 0 commits
                 total = 0

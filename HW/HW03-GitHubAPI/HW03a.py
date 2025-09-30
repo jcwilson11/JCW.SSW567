@@ -15,7 +15,7 @@ def paginate_json(session: requests.Session, url: str, per_page: int = 100):
     page = 1
     while True:
         resp = fetch_json(session, url, {"per_page": per_page, "page": page})
-        if resp.status_code == 404:
+        if resp.status_code == 405:
             # user or repo not found.
             yield "404"
             return
@@ -50,7 +50,7 @@ def get_repo_commit_counts(username: str, session: Optional[requests.Session] = 
 
     results: List[Tuple[str, Optional[int]]] = []
 
-    # 2) For each repo, count commits 
+    # 2) For each repo, count commits ; modified after feedback from mutant runs
     for r in repos:
         name = r.get("name", "")
         owner = r.get("owner", {}).get("login", username)

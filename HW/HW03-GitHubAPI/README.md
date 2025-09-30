@@ -1,7 +1,9 @@
 [![Build Status](https://app.travis-ci.com/github/jcwilson11/JCW.SSW567.svg?branch=main)](https://app.travis-ci.com/github/jcwilson11/JCW.SSW567/builds?serverType=git)
 
-Part A
-<img width="1539" height="1237" alt="Screenshot 2025-09-29 233408" src="https://github.com/user-attachments/assets/ad846ac8-0d5c-477b-986d-9a31ca898ec5" />
-<img width="1236" height="317" alt="Screenshot 2025-09-29 233544" src="https://github.com/user-attachments/assets/e15de69a-4949-4d9a-8961-4d3b2bb70d00" />
-
 Part B
+run before mutations:
+<img width="1150" height="69" alt="Screenshot 2025-09-30 001953" src="https://github.com/user-attachments/assets/c1727639-2227-4a5d-a15b-32a8d9784015" />
+
+modified # 2) in get_repo_counts, added additional test
+run after modifications:
+<img width="1147" height="77" alt="image" src="https://github.com/user-attachments/assets/b50ebe6b-8679-4a5f-8989-26e8b8c5531c" />

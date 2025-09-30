@@ -11,4 +11,4 @@ script:
   - script:
   - pwd
   - ls -R
-  - pytest -q
+  - pytest ./HW/HW03-GitHubAPI/test_HW03a.py

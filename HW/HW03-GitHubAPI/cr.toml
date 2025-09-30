@@ -1,0 +1,8 @@
+[cosmic-ray]
+module-path = "HW03a.py"
+timeout = 10.0
+excluded-modules = []
+test-command = "python -m pytest -q test_HW03a.py"
+
+[cosmic-ray.distributor]
+name = "local"

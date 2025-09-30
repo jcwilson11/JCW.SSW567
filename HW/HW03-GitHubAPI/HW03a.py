@@ -86,7 +86,7 @@ def format_repo_commit_counts(rows: List[Tuple[str, Optional[int]]]) -> str:
 
 def main(argv: list[str]) -> int:
     if len(argv) < 2:
-        print("Usage: python github_stats.py <github-username>", file=sys.stderr)
+        print("Usage: python HW03a.py <github-username>", file=sys.stderr)
         return 2
     username = argv[1]
     try:

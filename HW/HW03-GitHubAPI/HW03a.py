@@ -15,7 +15,7 @@ def paginate_json(session: requests.Session, url: str, per_page: int = 100):
     page = 1
     while True:
         resp = fetch_json(session, url, {"per_page": per_page, "page": page})
-        if resp.status_code == 405:
+        if resp.status_code == 404:
             # user or repo not found.
             yield "404"
             return

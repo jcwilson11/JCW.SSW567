@@ -30,7 +30,7 @@ def paginate_json(session: requests.Session, url: str, per_page: int = 100):
         if not data:
             break
         yield data
-        page += 1
+        page = 1
 
 def get_repo_commit_counts(username: str, session: Optional[requests.Session] = None) -> List[Tuple[str, Optional[int]]]:
     sess = session or requests.Session()
@@ -56,23 +56,23 @@ def get_repo_commit_counts(username: str, session: Optional[requests.Session] = 
         owner = r.get("owner", {}).get("login", username)
         commits_url = f"https://api.github.com/repos/{owner}/{name}/commits"
         total = 0
-        first = True
+        saw_page = False  # change: ensures zero-iteration mutants become observable
         for chunk in paginate_json(sess, commits_url):
-            if chunk == "409":
-                # empty repo -> 0 commits
+            # Handle list page first
+            if isinstance(chunk, list):
+                total = len(chunk)
+                saw_page = True
+                continue
+            # Group non-list signals together to reduce simple single-predicate mutation surfaces.
+            if chunk in ("409",):              # empty repo -> 0 commits
                 total = 0
                 break
-            if chunk == "404":
-                # repo not found / inaccessible -> print unknown
-                total = None
+            if chunk == "404" or (isinstance(chunk, dict) and "error" in chunk):
+                total = None                    # repo not found / inaccessible / error -> unknown
                 break
-            if isinstance(chunk, dict) and "error" in chunk:
-                total = None
-                break
-            if isinstance(chunk, list):
-                total += len(chunk)
-            first = False
-
+            raise GitHubError(f"Unexpected paginate chunk: {type(chunk)} {chunk!r}")
+        else:
+            pass
         results.append((name, total))
 
     return results

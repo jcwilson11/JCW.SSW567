@@ -135,3 +135,16 @@ def test_format_repo_commit_counts_basic():
     )
     assert format_repo_commit_counts(input_data) == expected_output
 
+#post mutation tests
+def test_get_repo_commit_counts_with_commits(monkeypatch):
+    def mock_paginate_json(session, url, per_page=100):
+        if url.endswith("/users/alice/repos"):
+            return [[{"name": "r1", "owner": {"login": "alice"}}]]
+        if url.endswith("/repos/alice/r1/commits"):
+            return [[{"id": 1}, {"id": 2}], []]  # one page of two commits
+        raise AssertionError("Unexpected URL: " + url)
+
+    monkeypatch.setattr("HW03a.paginate_json", mock_paginate_json)
+    rows = get_repo_commit_counts("alice")
+    assert rows == [("r1", 2)]
+

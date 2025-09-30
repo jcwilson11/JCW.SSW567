@@ -8,4 +8,4 @@ install:
   - pip install responses
   - pip install pytest-cov
 script:
-  - pytest .\test_HW03a.py
+  - pytest test_HW03a.py

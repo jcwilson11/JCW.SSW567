@@ -8,4 +8,7 @@ install:
   - pip install responses
   - pip install pytest-cov
 script:
-  - pytest test_HW03a.py
+  - script:
+  - pwd
+  - ls -R
+  - pytest -q

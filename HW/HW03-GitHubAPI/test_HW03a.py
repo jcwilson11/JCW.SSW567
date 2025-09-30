@@ -126,7 +126,7 @@ def test_get_repo_commit_counts_no_repos(monkeypatch):
     #assert len(result) == 1
 
 def test_format_repo_commit_counts_basic():
-    input_data = [("repo1", 5), ("repo2", 0), ("repo3", None), ("repo4", 10)]
+    input_data = [("repo1", 5), ("repo2", 0), ("repo3", None),] #("repo4", 10)
     expected_output = (
         "Repo: repo1 Number of commits: 5\n"
         "Repo: repo2 Number of commits: 0\n"

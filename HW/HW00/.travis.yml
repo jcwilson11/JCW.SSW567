@@ -1,0 +1,8 @@
+language: python
+python:
+  - "3.13"  # or whatever version you're using
+install:
+  - pip install -r requirements.txt
+  - pip install pytest
+script:
+  - pytest -q test_HW03a.py

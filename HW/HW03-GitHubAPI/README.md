@@ -1,1 +1,1 @@
-[![Build Status](https://app.travis-ci.com/github/jcwilson11/JCW.SSW567/builds/276436852?serverType=git)](https://travis-ci.com/jcwilson11/JCW.SSW567)
+[![Build Status](https://app.travis-ci.com/github/jcwilson11/JCW.SSW567.svg?branch=main)](https://app.travis-ci.com/github/jcwilson11/JCW.SSW567/builds?serverType=git)

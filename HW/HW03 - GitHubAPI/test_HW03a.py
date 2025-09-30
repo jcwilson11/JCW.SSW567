@@ -1,6 +1,6 @@
 import pytest
 import requests
-from HW03a import fetch_json, paginate_json
+from HW03a import fetch_json, paginate_json, get_repo_commit_counts, format_repo_commit_counts, GitHubError
 
 def test_fetch_json_success(monkeypatch):
     class MockResponse:
@@ -84,3 +84,54 @@ def test_paginate_json_success(monkeypatch):
     session = requests.Session()
     result = list(paginate_json(session, "https://api.github.com/fake"))
     assert result == responses[:-1]  # exclude empty page
+
+
+def test_get_repo_commit_counts_user_not_found(monkeypatch):
+    def mock_paginate_json(session, url, per_page=100):
+        return ["404"]
+
+    monkeypatch.setattr("HW03a.paginate_json", mock_paginate_json)
+    session = requests.Session()
+    with pytest.raises(GitHubError, match="User not found: invaliduser"):
+        get_repo_commit_counts("invaliduser", session)
+
+def test_get_repo_commit_counts_repo_error(monkeypatch):
+    def mock_paginate_json(session, url, per_page=100):
+        return [{"error": "500 Internal Server Error"}]
+
+    monkeypatch.setattr("HW03a.paginate_json", mock_paginate_json)
+    session = requests.Session()
+    with pytest.raises(GitHubError, match="Failed to fetch repos: 500 Internal Server Error"):
+        get_repo_commit_counts("erroruser", session)
+
+def test_get_repo_commit_counts_no_repos(monkeypatch):
+    calls = {"urls": []}
+
+    def mock_paginate_json(session, url, per_page=100):
+        calls["urls"].append(url)
+        if "/users/" in url and url.endswith("/repos"):
+            return [[]]  # one page, zero repos
+        raise AssertionError("Unexpected URL: " + url)
+
+    monkeypatch.setattr("HW03a.paginate_json", mock_paginate_json)
+    result = get_repo_commit_counts("someone")
+
+    # passes
+    assert isinstance(result, list)
+    assert result == []  # empty list when there are no repos
+    assert calls["urls"] == ["https://api.github.com/users/someone/repos"]  # only repo list was fetched
+
+    # intentional fail; if the function incorrectly returns anything else
+    #assert result is None
+    #assert len(result) == 1
+
+def test_format_repo_commit_counts_basic():
+    input_data = [("repo1", 5), ("repo2", 0), ("repo3", None), ("repo4", 10)]
+    expected_output = (
+        "Repo: repo1 Number of commits: 5\n"
+        "Repo: repo2 Number of commits: 0\n"
+        "Repo: repo3 Number of commits: unknown"
+        #"Repo: repo4 Number of commits: 9" # intentional fail
+    )
+    assert format_repo_commit_counts(input_data) == expected_output
+

@@ -61,3 +61,13 @@ Your code has been rated at 8.33/10
 -------------------------------------------------------------------
 Your code has been rated at 10.00/10 (previous run: 8.33/10, +1.67)
 ```
+
+### coverage test
+```
+(SSW567) PS C:\Users\icecr\JCW.SSW567\HW\HW03C-Coverage> coverage report -m
+Name                    Stmts   Miss  Cover   Missing
+-----------------------------------------------------
+hw03c_modification.py      17      0   100%
+-----------------------------------------------------
+TOTAL                      17      0   100%
+```

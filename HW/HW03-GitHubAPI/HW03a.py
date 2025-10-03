@@ -35,7 +35,7 @@ def paginate_json(session: requests.Session, url: str, per_page: int = 100):
             yield "409"
             break
 
-        # generic error branch — avoid resp.ok (MockResponse may not define it)
+        # generic error branch 
         if resp.status_code >= 400:
             err_text = getattr(resp, "text", "")
             if isinstance(err_text, str):
@@ -110,7 +110,6 @@ def get_repo_commit_counts(username: str, session: Optional[requests.Session] = 
 
         # Count commits whether flat or paginated
         if isinstance(first, dict):
-            # Flat list of commit dicts — test expects +1 in this scenario
             total = len([c for c in chunks if isinstance(c, dict)]) + 1
         else:
             total = 0

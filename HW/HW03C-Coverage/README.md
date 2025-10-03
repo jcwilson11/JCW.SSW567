@@ -1,3 +1,11 @@
+This homework improves code quality and test completeness for the triangle classifier.
+
+Pylint (source): raised from 8.12/10 → 10.00/10 by renaming to snake_case, adding a module docstring, and documenting functions.
+
+Pylint (tests): raised from 4.17/10 → 10.00/10 by adding a module docstring, wrapping long lines, and documenting test functions.
+
+Coverage: configured coverage to measure source only and added tests for edge/branch paths (triangle inequality, right-angle tolerance). Target: ≥80% line coverage.
+
 ### Initial Run - initial py
 ```
 (SSW567) PS C:\Users\icecr\JCW.SSW567\HW\HW03C-Coverage> pylint .\HW00b.py

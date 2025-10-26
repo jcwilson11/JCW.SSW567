@@ -163,3 +163,17 @@ FAILED HW/HW07b-LegacySystems/Test_Triangle.py::TestTriangles::test_scalene_basi
 ======================== 13 failed, 4 passed in 0.31s =========================
 <<<PYTHON-EXEC-OUTPUT
 Finished running tests!
+
+## Updated test suite vs updated triangle classifier code: 17 passed
+
+============================= test session starts =============================
+platform win32 -- Python 3.13.5, pytest-8.4.2, pluggy-1.5.0
+rootdir: c:\Users\Jcwil\JCW.SSW567
+plugins: hypothesis-6.138.14, cov-4.1.0, mock-3.14.0
+collected 17 items
+
+HW\HW07b-LegacySystems\Test_Triangle.py .................                [100%]
+
+============================= 17 passed in 0.27s ==============================
+<<<PYTHON-EXEC-OUTPUT
+Finished running tests!
